@@ -9,8 +9,15 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth.hashers import make_password
 
 from blog.serializers import PostSerializer
+from blog.models import Post
 
-class PostViewSet(viewsets.mixins.CreateModelMixin, viewsets.GenericViewSet):
+class PostViewSet(viewsets.mixins.CreateModelMixin,
+                    viewsets.mixins.ListModelMixin, 
+                    viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated,]
     serializer_class = PostSerializer
-        
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Post.objects.filter(created_by=user)
+        return queryset
