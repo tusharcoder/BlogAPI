@@ -21,3 +21,9 @@ class PostViewSet(viewsets.mixins.CreateModelMixin,
         user = self.request.user
         queryset = Post.objects.filter(created_by=user)
         return queryset
+    
+    def comments(self, request):
+        """
+        API to get the comments of the particular post
+        """
+        pass
