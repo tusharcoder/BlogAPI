@@ -25,7 +25,7 @@ class Post(BaseModel, TimeFieldsMixin, CreatedByMixin):
         return self.title
     
 class Comment(BaseModel, TimeFieldsMixin, CreatedByMixin):
-    for_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    for_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     comment_text = models.TextField()
 
     def __str__(self) -> str:

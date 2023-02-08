@@ -15,3 +15,8 @@ class CommentSerializer(serializers.ModelSerializer):
         validated_data['created_by'] = self.context['request'].user
         # validated_data['post'] = Post.objects.get(pk=validated_data.pop('post_id'))
         return super().create(validated_data)
+    
+class CommentReadSerializer(CommentSerializer):
+    class Meta:
+        model=Comment
+        fields=('comment_text','id')

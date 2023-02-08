@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from blog.models import Post
+from blog.serializers.comment import CommentSerializer, CommentReadSerializer
 
 class PostSerializer(serializers.ModelSerializer):
+    comments = CommentReadSerializer(many=True, read_only=True)
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -12,6 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields=(
             'title', 
             'description', 
-            # comments
+            'comments',
+            'id',
             # nested created by user
         )

@@ -19,7 +19,7 @@ class PostViewSet(viewsets.mixins.CreateModelMixin,
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Post.objects.filter(created_by=user)
+        queryset = Post.objects.all()
         return queryset
     
     def comments(self, request):
